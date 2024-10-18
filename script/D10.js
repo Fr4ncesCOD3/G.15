@@ -591,21 +591,35 @@ const addRedBackground = () => {
 }
 
 addRedBackground();
+
 /* ESERCIZIO 24
   Scrivi una funzione per aggiungere un nuovo elemento alla lista non ordinata con id "myList".
 */
 
 const addNewElement = () => {
-  //getElementById per selezionare l'elemento con l'id "myList"
-  let list = document.getElementById("myList");
-  //createElement per creare un nuovo elemento <li> con il testo "Nuovo elemento"
-  let newElement = document.createElement("li");
-  newElement.textContent = "Nuovo elemento";
-  //appendChild per aggiungere il nuovo elemento alla lista
-  list.appendChild(newElement);
+  // Verifica se l'elemento con id "myList" esiste
+  const ul = document.getElementById("myList");
+  if (!ul) {
+    console.error("Elemento con id 'myList' non trovato");
+    return;
+  }
+  // Crea un nuovo elemento <li>
+  const li = document.createElement("li");
+  
+  // Aggiunge il testo al nuovo elemento
+  li.innerText = "numeri";
+  
+  // Aggiunge il nuovo elemento <li> all'interno di <ul>
+  ul.appendChild(li);
+  
+  // Visualizza la lista aggiornata nella pagina HTML
+  document.getElementById("containerul").style.display = "block";
 }
 
-addNewElement();
+// Chiama la funzione quando la pagina è completamente caricata
+//window e load per assegnare un evento al caricamento della pagina
+//addNewElement per chiamare la funzione
+window.addEventListener("load", addNewElement);
 
 /* ESERCIZIO 25
   Scrivi una funzione per svuotare la lista non ordinata con id "myList".
@@ -624,6 +638,16 @@ emptyList();
   Scrivi una funzione per aggiungere ad ogni tag <tr> la classe CSS "test"
 */
 
+const addClass = () => {
+  //getElementsByTagName per selezionare tutti i tag <tr>
+  let trs = document.getElementsByTagName("tr");
+  //ciclo for per scorrere l'array
+  for (let i = 0; i < trs.length; i++) {
+    //classList.add per aggiungere la classe CSS "test"
+    trs[i].classList.add("test");
+  }
+}
+
 // [EXTRA] JS Avanzato
 
 /* ESERCIZIO 27
@@ -638,6 +662,16 @@ emptyList();
 
 */
 
+const halfTree = (height) => {
+  //ciclo for per costruire l'albero
+  for (let i = 1; i <= height; i++) {
+    //repeat() per aggiungere gli asterischi
+    console.log("*".repeat(i));
+  }
+}
+
+halfTree(3);
+
 /* ESERCIZIO 28
   Crea una funzione chiamata "tree" che riceve un numero come parametro e costruisce un albero di "*" (asterischi) dell'altezza fornita.
 
@@ -650,7 +684,43 @@ emptyList();
 
 */
 
+const tree = (height) => {
+  // costruire l'albero completo
+  for (let i = 1; i <= height; i++) {
+    // Calcola gli spazi prima degli asterischi
+    //height - i per ottenere il numero di spazi
+    let spazi = " ".repeat(height - i);
+    // Calcola gli asterischi per ogni riga
+    //2 * i - 1 per ottenere il numero di asterischi
+    let asterischi = "*".repeat(2 * i - 1);
+    // Stampa la riga completa
+    console.log(spazi + asterischi);
+  }
+}
+
+tree(3);
+
 /* ESERCIZIO 29
   Crea una funzione chiamata "isItPrime" che riceve un numero come parametro e ritorna true se il numero fornito è un numero primo.
 */
+
+const isItPrime = (number) => {
+  // Verifica se il numero è minore di 2
+  //se il numero è minore di 2, non è primo
+  if (number <= 1) {
+    return false;
+  }
+  // Ciclo per verificare se il numero è divisibile per qualche numero da 2 a sqrt(number)
+  for (let i = 2; i <= Math.sqrt(number); i++) {
+    if (number % i === 0) {
+      return false;
+    }
+  }
+  // Se il numero non è divisibile per nessun numero, è primo
+  return true;
+}
+
+// Esempi di utilizzo
+console.log(isItPrime(2)); // true
+
 
