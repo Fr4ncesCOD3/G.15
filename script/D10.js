@@ -443,22 +443,98 @@ console.log(onlyTheYears(movies));
   Scrivi una funzione chiamata "onlyInLastMillennium" che ritorna solamente i film prodotto nel millennio scorso contenuti nell'array "movies" fornito.
 */
 
+const onlyInLastMillennium = (movies) => {
+  //filtrare i film prodotti nel millennio scorso
+  //parseInt() per convertire l'anno in un numero
+  return movies.filter((movie) => parseInt(movie.Year) < 2000);
+}
+
+console.log(onlyInLastMillennium(movies));
+
 /* ESERCIZIO 16
   Scrivi una funzione chiamata "sumAllTheYears" che ritorna la somma di tutti gli anni in cui sono stati prodotti i film contenuti nell'array "movies" fornito.
 */
 
+const sommaAnniFilm = (films) => {
+  let somma = 0;
+  //ciclo for per scorrere l'array  
+  for (let i = 0; i < films.length; i++) {
+    //somma degli anni di uscita dei film
+    somma = somma + Number(films[i].Year);
+  }
+  return somma;
+}
+
+console.log(sommaAnniFilm(movies));
+
 /* ESERCIZIO 17
   Scrivi una funzione chiamata "searchByTitle" che riceve una stringa come parametro e ritorna i film nell'array "movies" fornito che la contengono nel titolo.
 */
+
+const searchByTitle = (title) => {
+  //array per i risultati
+  let results = [];
+  
+  //ciclo for per scorrere l'array
+  for (let i = 0; i < movies.length; i++) {
+    //.includes() per verificare se il titolo del film contiene la stringa
+    if (movies[i].Title.toLowerCase().includes(title.toLowerCase())) {
+      //aggiunta del film ai risultati
+      results.push(movies[i]);
+    }
+  }
+  
+  //ritorno dell'array dei risultati
+  return results;
+}
+
+//test della funzione
+console.log(searchByTitle("Avengers"));
 
 /* ESERCIZIO 18
   Scrivi una funzione chiamata "searchAndDivide" che riceve una stringa come parametro e ritorna un oggetto contenente due array: "match" e "unmatch".
   "match" deve includere tutti i film dell'array "movies" fornito che contengono la stringa fornita all'interno del proprio titolo, mentre "unmatch" deve includere tutti i rimanenti.
 */
 
+const searchAndDivide = (title) => {
+  //array per i film match e unmatch
+  let match = [];
+  let unmatch = [];
+  
+  //ciclo for per scorrere l'array
+  for (let i = 0; i < movies.length; i++) {
+    //.includes() per verificare se il titolo del film contiene la stringa
+    if (movies[i].Title.toLowerCase().includes(title.toLowerCase())) {
+      //aggiunta del film ai risultati
+      match.push(movies[i]);
+    } else {
+      //aggiunta del film ai risultati
+      unmatch.push(movies[i]);
+    }
+  }
+
+  //ritorno dell'oggetto contenente i film match e unmatch
+  return {
+    match: match,
+    unmatch: unmatch
+  };
+}
+
+//test della funzione
+console.log(searchAndDivide("Tarzan"));
+
 /* ESERCIZIO 19
   Scrivi una funzione chiamata "removeIndex" che riceve un numero come parametro e ritorna l'array "movies" fornito privo dell'elemento nella posizione ricevuta come parametro.
 */
+
+const removeIndex = (index) => {
+  //.splice() per rimuovere l'elemento dall'array
+  //index è la posizione dell'elemento da rimuovere
+  //1 è il numero di elementi da rimuovere
+  return movies.splice(index, 1);
+}
+
+console.log(removeIndex(1));
 
 // DOM (nota: gli elementi che selezionerai non si trovano realmente nella pagina)
 
@@ -466,25 +542,83 @@ console.log(onlyTheYears(movies));
   Scrivi una funzione per selezionare l'elemento dotato di id "container" all'interno della pagina.
 */
 
+const selectContainer = () => {
+  //getElementById per selezionare l'elemento con l'id "container"
+  return document.getElementById("container");
+}
+
+console.log(selectContainer());
+
 /* ESERCIZIO 21
   Scrivi una funzione per selezionare ogni tag <td> all'interno della pagina.
 */
+
+const selectTd = () => {
+  //getElementsByTagName per selezionare tutti i tag <td>
+  return document.getElementsByTagName("td");
+}
+
+console.log(selectTd());
 
 /* ESERCIZIO 22
   Scrivi una funzione che, tramite un ciclo, stampa in console il testo contenuto in ogni tag <td> all'interno della pagina.
 */
 
+const printTd = () => {
+  //getElementsByTagName per selezionare tutti i tag <td>
+  let tds = document.getElementsByTagName("td");
+  //ciclo for per scorrere l'array
+  for (let i = 0; i < tds.length; i++) {
+    //textContent per ottenere il testo contenuto nel tag <td>
+    console.log(tds[i].textContent);
+  }
+}
+
+printTd();
+
 /* ESERCIZIO 23
   Scrivi una funzione per aggiungere un background di colore rosso a ogni link all'interno della pagina.
 */
 
+const addRedBackground = () => {
+  //getElementsByTagName per selezionare tutti i link
+  let links = document.getElementsByTagName("a");
+  //ciclo for per scorrere l'array
+  for (let i = 0; i < links.length; i++) {
+    //style per aggiungere un background di colore rosso
+    links[i].style.backgroundColor = "red";
+  }
+}
+
+addRedBackground();
 /* ESERCIZIO 24
   Scrivi una funzione per aggiungere un nuovo elemento alla lista non ordinata con id "myList".
 */
 
+const addNewElement = () => {
+  //getElementById per selezionare l'elemento con l'id "myList"
+  let list = document.getElementById("myList");
+  //createElement per creare un nuovo elemento <li> con il testo "Nuovo elemento"
+  let newElement = document.createElement("li");
+  newElement.textContent = "Nuovo elemento";
+  //appendChild per aggiungere il nuovo elemento alla lista
+  list.appendChild(newElement);
+}
+
+addNewElement();
+
 /* ESERCIZIO 25
   Scrivi una funzione per svuotare la lista non ordinata con id "myList".
 */
+
+const emptyList = () => {
+  //getElementById per selezionare l'elemento con l'id "myList"
+  let list = document.getElementById("myList");
+  //innerHTML = "" per svuotare la lista
+  list.innerHTML = "";
+}
+
+emptyList();
 
 /* ESERCIZIO 26
   Scrivi una funzione per aggiungere ad ogni tag <tr> la classe CSS "test"
@@ -519,6 +653,4 @@ console.log(onlyTheYears(movies));
 /* ESERCIZIO 29
   Crea una funzione chiamata "isItPrime" che riceve un numero come parametro e ritorna true se il numero fornito è un numero primo.
 */
-
-/* Questo array viene usato per gli esercizi. Non modificarlo. */
 
